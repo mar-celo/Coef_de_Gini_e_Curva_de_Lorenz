@@ -1,11 +1,358 @@
 ---
-title: "Coef_de_Gini_e_Curva_de_Lorenz"
+title: "Coeficiente de Gini"
 ---
 
-This is a Quarto website.
+O coeficiente de Gini foi proposto por Corrado Gini (1912) e vem sendo muito utlizado para medir a desigualdade de distribuição de renda nos países. No entanto, sua aplicação pode ser expandida para diversos propósitos.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+```{r warning=FALSE, echo=FALSE, message=FALSE}
 
-```{r}
-1 + 1
+#install.packages('gglorenz')
+library(gglorenz)
+library(tidyverse)
+library(plotly)
+library(crosstalk)
+options(scipen=999, digits=2)
+```
+
+
+
+# Remuneração Total (Bruta + Extra)
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+
+# p <- ggplot2::ggplot(df, aes(REMU_TOTAL)) +
+#   stat_lorenz()+
+#   geom_abline(linetype = "dashed")+
+#   annotate_ineq(df$REMU_TOTAL)+ 
+#    theme_minimal()
+# 
+# plotly::ggplotly(p)
+```
+
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+library(plotly)
+
+criar_grafico_lorenz <- function(df) {
+  # Criar o gráfico da curva de Lorenz
+  lorenz_plot <- plot_ly(df, x = ~cumulative_prop, y = ~y_values, type ='scatter', mode ='lines', name ='Curva de Lorenz')
+
+  # Adicionar a linha de igualdade (linha diagonal)
+  lorenz_plot <- add_trace(lorenz_plot, x = c(0, 1), y = c(0, 1), type ='scatter', mode ='lines', name ='Igualdade')
+
+  # Adicionar anotação para o índice de Gini
+  lorenz_plot <- add_annotations(lorenz_plot,
+                                  text = paste(
+                                    "Índice de Gini:",
+                                    round(unique(df$gini_index), 2)
+                                  ),
+                                  x = 0.2, y = 0.8,
+                                  showarrow = FALSE,
+                                  font = list(size = 12, color ='black'))
+
+  # Configurar o layout do gráfico
+  lorenz_plot <- layout(lorenz_plot, title ='Curva de Lorenz e Índice de Gini',
+                        xaxis = list(title ='Proporção Acumulada dos Servidores Públicos'),
+                        yaxis = list(title ='Proporção Acumulada da Remuneração'))
+
+  # Exibir o gráfico
+  return(lorenz_plot)
+}
+
+
+
+
+```
+
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+df_total <- readr::read_rds("~/Trabalho/CGINF/Projetos_R/coeficiente_de_Gini/data/df_orgao.rds")
+df_orgao <- readr::read_rds("~/Trabalho/CGINF/Projetos_R/coeficiente_de_Gini/data/df_orgao.rds")
+```
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+library(plotly)
+
+criar_grafico_lorenz <- function(df) {
+  # Criar o gráfico da curva de Lorenz
+  lorenz_plot <- plot_ly(df, x = ~cumulative_prop, y = ~y_values, type ='scatter', mode ='lines', name ='Curva de Lorenz')
+
+  # Adicionar a linha de igualdade (linha diagonal)
+  lorenz_plot <- add_trace(lorenz_plot, x = c(0, 1), y = c(0, 1), type ='scatter', mode ='lines', name ='Igualdade')
+
+  # Adicionar anotação para o índice de Gini
+  lorenz_plot <- add_annotations(lorenz_plot,
+                                  text = paste(
+                                    "Índice de Gini:",
+                                    round(unique(df$gini_index), 2)
+                                  ),
+                                  x = 0.2, y = 0.8,
+                                  showarrow = FALSE,
+                                  font = list(size = 12, color ='black'))
+
+  # Configurar o layout do gráfico
+  lorenz_plot <- layout(lorenz_plot, title ='Curva de Lorenz e Índice de Gini',
+                        xaxis = list(title ='Proporção Acumulada dos Servidores Públicos'),
+                        yaxis = list(title ='Proporção Acumulada da Remuneração'))
+
+  # Exibir o gráfico
+  return(lorenz_plot)
+}
+
+
+
+```
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+# Usar a função para criar o gráfico de Lorenz
+
+grafico_lorenz <- criar_grafico_lorenz(df_total)
+grafico_lorenz
+```
+
+# Por Órgão Superior
+
+
+## ME 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='ME'))
+grafico_lorenz
+```
+
+## PR 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='PR'))
+grafico_lorenz
+```
+
+## MEC 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MEC'))
+grafico_lorenz
+```
+
+## MS 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MS'))
+grafico_lorenz
+```
+
+## MTP 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MTP'))
+grafico_lorenz
+```
+
+## MMFDH 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MMFDH'))
+grafico_lorenz
+```
+
+## CGU 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='CGU'))
+grafico_lorenz
+```
+
+## MIDR 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MIDR'))
+grafico_lorenz
+```
+
+## MAPA 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MAPA'))
+grafico_lorenz
+```
+
+## MJ 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MJ'))
+grafico_lorenz
+```
+
+## MMA 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MMA'))
+grafico_lorenz
+```
+
+## MPO 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MPO'))
+grafico_lorenz
+```
+
+## MINFRA 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MINFRA'))
+grafico_lorenz
+```
+
+## MPA 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MPA'))
+grafico_lorenz
+```
+
+## MCTIC 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MCTIC'))
+grafico_lorenz
+```
+
+## MDIC 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MDIC'))
+grafico_lorenz
+```
+
+## MRE 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MRE'))
+grafico_lorenz
+```
+
+## MDA 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MDA'))
+grafico_lorenz
+```
+
+## MD 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MD'))
+grafico_lorenz
+```
+
+## MME 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MME'))
+grafico_lorenz
+```
+
+## MINC 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MINC'))
+grafico_lorenz
+```
+
+## DPU 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='DPU'))
+grafico_lorenz
+```
+
+## MCID 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MCID'))
+grafico_lorenz
+```
+
+## MPI 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MPI'))
+grafico_lorenz
+```
+
+## MC 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MC'))
+grafico_lorenz
+```
+
+## MCOM 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MCOM'))
+grafico_lorenz
+```
+
+## MTUR 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |>
+    filter(SG_ORGAO_VINCULACAO =='MTUR'))
+grafico_lorenz
+
 ```

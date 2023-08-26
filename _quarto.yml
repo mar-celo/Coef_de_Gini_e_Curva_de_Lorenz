@@ -3,11 +3,11 @@ project:
   output-dir: docs
 
 website:
-  title: "Coef_de_Gini_e_Curva_de_Lorenz"
+  title: "CGINF"
   navbar:
     left:
       - href: index.qmd
-        text: Home
+        text: Curva de Lorenz e Índice de Gini
       - about.qmd
 
 format:
@@ -15,6 +15,10 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
+
+editor: visual
+
+lang: pt
 
 
 

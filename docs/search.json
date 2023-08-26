@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Coef_de_Gini_e_Curva_de_Lorenz",
+    "title": "Coeficiente de Gini",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+    "text": "O coeficiente de Gini foi proposto por Corrado Gini (1912) e vem sendo muito utlizado para medir a desigualdade de distribuição de renda nos países. No entanto, sua aplicação pode ser expandida para diversos propósitos."
   },
   {
     "objectID": "about.html",
@@ -12,5 +12,194 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html#me",
+    "href": "index.html#me",
+    "title": "Coeficiente de Gini",
+    "section": "ME",
+    "text": "ME"
+  },
+  {
+    "objectID": "index.html#pr",
+    "href": "index.html#pr",
+    "title": "Coeficiente de Gini",
+    "section": "PR",
+    "text": "PR"
+  },
+  {
+    "objectID": "index.html#mec",
+    "href": "index.html#mec",
+    "title": "Coeficiente de Gini",
+    "section": "MEC",
+    "text": "MEC"
+  },
+  {
+    "objectID": "index.html#ms",
+    "href": "index.html#ms",
+    "title": "Coeficiente de Gini",
+    "section": "MS",
+    "text": "MS"
+  },
+  {
+    "objectID": "index.html#mtp",
+    "href": "index.html#mtp",
+    "title": "Coeficiente de Gini",
+    "section": "MTP",
+    "text": "MTP"
+  },
+  {
+    "objectID": "index.html#mmfdh",
+    "href": "index.html#mmfdh",
+    "title": "Coeficiente de Gini",
+    "section": "MMFDH",
+    "text": "MMFDH"
+  },
+  {
+    "objectID": "index.html#cgu",
+    "href": "index.html#cgu",
+    "title": "Coeficiente de Gini",
+    "section": "CGU",
+    "text": "CGU"
+  },
+  {
+    "objectID": "index.html#midr",
+    "href": "index.html#midr",
+    "title": "Coeficiente de Gini",
+    "section": "MIDR",
+    "text": "MIDR"
+  },
+  {
+    "objectID": "index.html#mapa",
+    "href": "index.html#mapa",
+    "title": "Coeficiente de Gini",
+    "section": "MAPA",
+    "text": "MAPA"
+  },
+  {
+    "objectID": "index.html#mj",
+    "href": "index.html#mj",
+    "title": "Coeficiente de Gini",
+    "section": "MJ",
+    "text": "MJ"
+  },
+  {
+    "objectID": "index.html#mma",
+    "href": "index.html#mma",
+    "title": "Coeficiente de Gini",
+    "section": "MMA",
+    "text": "MMA"
+  },
+  {
+    "objectID": "index.html#mpo",
+    "href": "index.html#mpo",
+    "title": "Coeficiente de Gini",
+    "section": "MPO",
+    "text": "MPO"
+  },
+  {
+    "objectID": "index.html#minfra",
+    "href": "index.html#minfra",
+    "title": "Coeficiente de Gini",
+    "section": "MINFRA",
+    "text": "MINFRA"
+  },
+  {
+    "objectID": "index.html#mpa",
+    "href": "index.html#mpa",
+    "title": "Coeficiente de Gini",
+    "section": "MPA",
+    "text": "MPA"
+  },
+  {
+    "objectID": "index.html#mctic",
+    "href": "index.html#mctic",
+    "title": "Coeficiente de Gini",
+    "section": "MCTIC",
+    "text": "MCTIC"
+  },
+  {
+    "objectID": "index.html#mdic",
+    "href": "index.html#mdic",
+    "title": "Coeficiente de Gini",
+    "section": "MDIC",
+    "text": "MDIC"
+  },
+  {
+    "objectID": "index.html#mre",
+    "href": "index.html#mre",
+    "title": "Coeficiente de Gini",
+    "section": "MRE",
+    "text": "MRE"
+  },
+  {
+    "objectID": "index.html#mda",
+    "href": "index.html#mda",
+    "title": "Coeficiente de Gini",
+    "section": "MDA",
+    "text": "MDA"
+  },
+  {
+    "objectID": "index.html#md",
+    "href": "index.html#md",
+    "title": "Coeficiente de Gini",
+    "section": "MD",
+    "text": "MD"
+  },
+  {
+    "objectID": "index.html#mme",
+    "href": "index.html#mme",
+    "title": "Coeficiente de Gini",
+    "section": "MME",
+    "text": "MME"
+  },
+  {
+    "objectID": "index.html#minc",
+    "href": "index.html#minc",
+    "title": "Coeficiente de Gini",
+    "section": "MINC",
+    "text": "MINC"
+  },
+  {
+    "objectID": "index.html#dpu",
+    "href": "index.html#dpu",
+    "title": "Coeficiente de Gini",
+    "section": "DPU",
+    "text": "DPU"
+  },
+  {
+    "objectID": "index.html#mcid",
+    "href": "index.html#mcid",
+    "title": "Coeficiente de Gini",
+    "section": "MCID",
+    "text": "MCID"
+  },
+  {
+    "objectID": "index.html#mpi",
+    "href": "index.html#mpi",
+    "title": "Coeficiente de Gini",
+    "section": "MPI",
+    "text": "MPI"
+  },
+  {
+    "objectID": "index.html#mc",
+    "href": "index.html#mc",
+    "title": "Coeficiente de Gini",
+    "section": "MC",
+    "text": "MC"
+  },
+  {
+    "objectID": "index.html#mcom",
+    "href": "index.html#mcom",
+    "title": "Coeficiente de Gini",
+    "section": "MCOM",
+    "text": "MCOM"
+  },
+  {
+    "objectID": "index.html#mtur",
+    "href": "index.html#mtur",
+    "title": "Coeficiente de Gini",
+    "section": "MTUR",
+    "text": "MTUR"
   }
 ]
