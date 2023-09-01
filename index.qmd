@@ -16,7 +16,7 @@ options(scipen=999, digits=2)
 
 
 
-# Remuneração Total (Bruta + Extra)
+## Remuneração Total (Bruta + Extra)
 
 ```{r warning=FALSE, echo=FALSE, message=FALSE}
 
@@ -59,9 +59,6 @@ criar_grafico_lorenz <- function(df) {
   return(lorenz_plot)
 }
 
-
-
-
 ```
 
 
@@ -69,6 +66,8 @@ criar_grafico_lorenz <- function(df) {
 df_total <- readr::read_rds("~/Trabalho/CGINF/Projetos_R/coeficiente_de_Gini/data/df_total.rds")
 df_orgao <- readr::read_rds("~/Trabalho/CGINF/Projetos_R/coeficiente_de_Gini/data/df_orgao.rds")
 ```
+
+
 
 ```{r warning=FALSE, echo=FALSE, message=FALSE}
 library(plotly)
@@ -103,6 +102,29 @@ criar_grafico_lorenz <- function(df) {
 
 ```
 
+## Comparação da Remuneração por Órgão Superior
+
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+library(reldist)
+library(forcats)
+#reldist::gini(REMU_TOTAL)
+p <-  df_orgao |> 
+  ggplot()+
+  aes( y  = REMU_TOTAL, x = forcats::fct_reorder(SG_ORGAO_VINCULACAO, gini_index)) + 
+  geom_errorbar(stat = "boxplot", width = 0.2) +
+  geom_boxplot(width = 0.4, fill = "white",
+               outlier.shape = 1, outlier.size = 2) +
+  geom_point(stat = "summary", fun = "mean", shape = 8,
+             size = 1, color = "blue") +
+  labs(title = "Remuneração por Órgão Superior",
+    y = "", x = "") +
+  coord_flip() +
+  theme_minimal()
+p
+#plotly::ggplotly(p)
+```
+
 ```{r warning=FALSE, echo=FALSE, message=FALSE}
 # Usar a função para criar o gráfico de Lorenz
 
@@ -110,96 +132,17 @@ grafico_lorenz <- criar_grafico_lorenz(df_total)
 grafico_lorenz
 ```
 
+
+
 # Por Órgão Superior
 
 
-## ME 
+## MPO 
 
 ```{r warning=FALSE, echo=FALSE, message=FALSE}
 grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='ME'))
-grafico_lorenz
-```
-
-## PR 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='PR'))
-grafico_lorenz
-```
-
-## MEC 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MEC'))
-grafico_lorenz
-```
-
-## MS 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MS'))
-grafico_lorenz
-```
-
-## MTP 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MTP'))
-grafico_lorenz
-```
-
-## MMFDH 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MMFDH'))
-grafico_lorenz
-```
-
-## CGU 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='CGU'))
-grafico_lorenz
-```
-
-## MIDR 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MIDR'))
-grafico_lorenz
-```
-
-## MAPA 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MAPA'))
-grafico_lorenz
-```
-
-## MJ 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MJ'))
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MPO')
+)
 grafico_lorenz
 ```
 
@@ -207,134 +150,26 @@ grafico_lorenz
 
 ```{r warning=FALSE, echo=FALSE, message=FALSE}
 grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MMA'))
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MMA')
+)
 grafico_lorenz
 ```
 
-## MPO 
+## PR 
 
 ```{r warning=FALSE, echo=FALSE, message=FALSE}
 grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MPO'))
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='PR')
+)
 grafico_lorenz
 ```
 
-## MINFRA 
+## ME 
 
 ```{r warning=FALSE, echo=FALSE, message=FALSE}
 grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MINFRA'))
-grafico_lorenz
-```
-
-## MPA 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MPA'))
-grafico_lorenz
-```
-
-## MCTIC 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MCTIC'))
-grafico_lorenz
-```
-
-## MDIC 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MDIC'))
-grafico_lorenz
-```
-
-## MRE 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MRE'))
-grafico_lorenz
-```
-
-## MDA 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MDA'))
-grafico_lorenz
-```
-
-## MD 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MD'))
-grafico_lorenz
-```
-
-## MME 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MME'))
-grafico_lorenz
-```
-
-## MINC 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MINC'))
-grafico_lorenz
-```
-
-## DPU 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='DPU'))
-grafico_lorenz
-```
-
-## MCID 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MCID'))
-grafico_lorenz
-```
-
-## MPI 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MPI'))
-grafico_lorenz
-```
-
-## MC 
-
-```{r warning=FALSE, echo=FALSE, message=FALSE}
-grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MC'))
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='ME')
+)
 grafico_lorenz
 ```
 
@@ -342,8 +177,143 @@ grafico_lorenz
 
 ```{r warning=FALSE, echo=FALSE, message=FALSE}
 grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MCOM'))
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MCOM')
+)
+grafico_lorenz
+```
+
+## MPA 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MPA')
+)
+grafico_lorenz
+```
+
+## MMFDH 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MMFDH')
+)
+grafico_lorenz
+```
+
+## DPU 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='DPU')
+)
+grafico_lorenz
+```
+
+## MPI 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MPI')
+)
+grafico_lorenz
+```
+
+## MIDR 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MIDR')
+)
+grafico_lorenz
+```
+
+## MC 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MC')
+)
+grafico_lorenz
+```
+
+## MCID 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MCID')
+)
+grafico_lorenz
+```
+
+## MEC 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MEC')
+)
+grafico_lorenz
+```
+
+## MAPA 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MAPA')
+)
+grafico_lorenz
+```
+
+## MME 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MME')
+)
+grafico_lorenz
+```
+
+## MINC 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MINC')
+)
+grafico_lorenz
+```
+
+## MRE 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MRE')
+)
+grafico_lorenz
+```
+
+## MD 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MD')
+)
+grafico_lorenz
+```
+
+## MTP 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MTP')
+)
+grafico_lorenz
+```
+
+## MS 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MS')
+)
 grafico_lorenz
 ```
 
@@ -351,8 +321,62 @@ grafico_lorenz
 
 ```{r warning=FALSE, echo=FALSE, message=FALSE}
 grafico_lorenz <- criar_grafico_lorenz(
-  df_orgao |>
-    filter(SG_ORGAO_VINCULACAO =='MTUR'))
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MTUR')
+)
 grafico_lorenz
-
 ```
+
+## MINFRA 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MINFRA')
+)
+grafico_lorenz
+```
+
+## MDIC 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MDIC')
+)
+grafico_lorenz
+```
+
+## MDA 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MDA')
+)
+grafico_lorenz
+```
+
+## MCTIC 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MCTIC')
+)
+grafico_lorenz
+```
+
+## MJ 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='MJ')
+)
+grafico_lorenz
+```
+
+## CGU 
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+grafico_lorenz <- criar_grafico_lorenz(
+  df_orgao |> filter(SG_ORGAO_VINCULACAO =='CGU')
+)
+grafico_lorenz
+```
+
